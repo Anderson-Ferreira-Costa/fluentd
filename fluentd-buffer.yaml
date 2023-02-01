@@ -62,7 +62,7 @@ spec:
         image: fluent/fluentd-kubernetes-daemonset:v1.4.2-debian-elasticsearch-1.1
         env:
           - name:  FLUENT_ELASTICSEARCH_HOST
-            value: "vpc-meios-de-pagamentos-prd-smyl652kbppqus5htk4wknuvxm.ca-central-1.es.amazonaws.com"
+            value: ""
           - name:  FLUENT_ELASTICSEARCH_PORT
             value: "443"
           - name: FLUENT_ELASTICSEARCH_SCHEME
@@ -98,9 +98,9 @@ spec:
           # X-Pack Authentication
           # =====================
           - name: FLUENT_ELASTICSEARCH_USER
-            value: "root"
+            value: ""
           - name: FLUENT_ELASTICSEARCH_PASSWORD
-            value: "lpeDdT$3XTp30CEmpb9RK5fckeg9NET"
+            value: ""
         resources:
           limits:
             memory: 512Mi
