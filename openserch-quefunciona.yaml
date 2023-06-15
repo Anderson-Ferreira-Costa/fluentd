@@ -40,6 +40,10 @@ metadata:
   namespace: kube-system
 data:
   fluent.conf: |
+    <system>
+      log_level info
+    </system>
+
     <source>
       @type tail
       @id in_tail_container_logs
@@ -51,51 +55,31 @@ data:
       <parse>
         @type "cri"
         time_format "%Y-%m-%dT%H:%M:%S.%N%:z"
-        unmatched_lines
       </parse>
     </source>
     
     <filter kubernetes.**>
       @type kubernetes_metadata
-      @id filter_kube_metadata
-      kubernetes_url "https://172.20.0.1:443/api"
-      verify_ssl true
-      skip_labels false
-      skip_container_metadata false
-      skip_master_url false
-      skip_namespace_metadata false
-      watch true
     </filter>
     
     <match **>
       @type opensearch
-      @id out_os
-      @log_level "info"
-      include_tag_key true
-      host "vpc-portofazneo-hml-wxdlqoqkwbtferw4cu73ndyxma.ca-central-1.es.amazonaws.com"
+      host vpc-portofazneo-hml-wxdlqoqkwbtferw4cu73ndyxma.ca-central-1.es.amazonaws.com
       port 443
       scheme https
-      ssl_verify true
       ssl_version TLSv1_2
-      user "master"
+      ssl_verify true
+      user master
       password SbU9\d`#J!)>Cy%15o6yzks_i6QC0hJ#
-      index_name "fluentd"
-      logstash_dateformat "%Y.%m.%d"
-      logstash_format false
-      logstash_prefix "logstash"
-      logstash_prefix_separator "-"
-        <buffer>
-          flush_thread_count 1
-          flush_mode interval
-          flush_interval 60s
-          chunk_limit_size 8M
-          total_limit_size 512M
-          retry_max_interval 30
-          retry_timeout 72h
-          retry_forever false
-        </buffer>
-     </match>
-    
+      index_name fluentd-index
+      type_name fluentd-type
+      include_tag_key true
+      logstash_format true
+      logstash_prefix logstash
+      logstash_prefix_separator -
+      logstash_dateformat %Y.%m.%d
+      flush_interval 5s
+    </match>
 ---
 apiVersion: apps/v1
 kind: DaemonSet
