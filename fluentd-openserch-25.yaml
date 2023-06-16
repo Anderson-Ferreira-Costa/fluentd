@@ -64,13 +64,13 @@ data:
     
     <match **>
       @type opensearch
-      host vpc-portofazneo-hml-wxdlqoqkwbtferw4cu73ndyxma.ca-central-1.es.amazonaws.com
+      host ***************************
       port 443
       scheme https
       ssl_version TLSv1_2
       ssl_verify true
-      user master
-      password SbU9\d`#J!)>Cy%15o6yzks_i6QC0hJ#
+      user ***************************
+      password ***************************
       index_name fluentd-index
       type_name fluentd-type
       include_tag_key true
