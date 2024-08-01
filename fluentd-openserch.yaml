@@ -79,6 +79,9 @@ data:
       logstash_prefix_separator -
       logstash_dateformat %Y.%m.%d
       flush_interval 5s
+      reload_connections false 
+      reconnect_on_error true
+      reload_on_failure true
     </match>
 ---
 apiVersion: apps/v1
